@@ -2,6 +2,10 @@ from decouple import config
 
 LOG_LEVEL = config("LOG_LEVEL", default="INFO")
 OUTPUT_TABLE = config("OUTPUT_TABLE")
+BRIGHTDATA_PROXY = config("BRIGHTDATA_PROXY")
+BRIGHTDATA_PORT = config("BRIGHTDATA_PORT", cast=int)
+BRIGHTDATA_USER = config("BRIGHTDATA_USER")
+BRIGHTDATA_PASSWD = config("BRIGHTDATA_PASSWD")
 INSERTER_MAX_RETRIES = config("INSERTER_MAX_RETRIES", default=3, cast=int)
 REQUEST_MAX_RETRIES = config("REQUEST_MAX_RETRIES", default=3, cast=int)
 REQUEST_BACKOFF_FACTOR = config("REQUEST_BACKOFF_FACTOR", default=2, cast=int)
