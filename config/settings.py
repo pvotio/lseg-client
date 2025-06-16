@@ -1,6 +1,7 @@
 from decouple import config
 
 LOG_LEVEL = config("LOG_LEVEL", default="INFO")
+THREAD_COUNT = config("THREAD_COUNT", default=10, cast=int)
 OUTPUT_TABLE = config("OUTPUT_TABLE")
 BRIGHTDATA_PROXY = config("BRIGHTDATA_PROXY")
 BRIGHTDATA_PORT = config("BRIGHTDATA_PORT", cast=int)
