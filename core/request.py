@@ -13,7 +13,9 @@ class Request:
             try:
                 if not kwargs.get("proxies", None):
                     kwargs["proxies"] = self.__get_proxy()
-                return requests.request(method=method, url=url, *args, **kwargs)
+                req = requests.request(method=method, url=url, *args, **kwargs)
+                req.raise_for_status()
+                return req
             except requests.exceptions.RequestException as e:
                 logger.error(
                     f"{method.upper()} request failed. Attempt {i + 1} of {settings.REQUEST_MAX_RETRIES}. Error: {e}"  # noqa: E501
