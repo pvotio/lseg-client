@@ -31,7 +31,7 @@ class LSEG:
             resp = self.request("GET", url)
             resp.raise_for_status()
             self.rics = resp.json()
-            logger.info("Successfully fetched and trimmed tickers to top 100")
+            logger.info("Successfully fetched tickers")
         except Exception as e:
             logger.error("Failed to fetch tickers: %s", str(e))
             raise
@@ -76,7 +76,7 @@ class LSEG:
                     ric[1],
                 )
                 self.result[ric] = self.fetch_esg_scores(ric[1])
-                logger.info(
+                logger.debug(
                     "Thread %s: fetched data for %s",
                     threading.current_thread().name,
                     ric[1],
