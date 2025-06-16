@@ -26,9 +26,9 @@ class Request:
                 time.sleep(i**settings.REQUEST_BACKOFF_FACTOR)
 
     def __get_proxy(self):
-        proxy_creds = f"{settings.BRIGHTDATA_USER}-session-{random.random()}:{settings.BRIGHTDATA_PASSWD}"
+        proxy_creds = f"{settings.BRIGHTDATA_USER}-session-{random.random()}:{settings.BRIGHTDATA_PASSWD}"  # noqa: E501
         proxies = {
-            "http": f"http://{proxy_creds}@{settings.BRIGHTDATA_PROXY}:{settings.BRIGHTDATA_PORT}",
-            "https": f"https://{proxy_creds}@{settings.BRIGHTDATA_PROXY}:{settings.BRIGHTDATA_PORT}",
+            "http": f"http://{proxy_creds}@{settings.BRIGHTDATA_PROXY}:{settings.BRIGHTDATA_PORT}",  # noqa: E501
+            "https": f"https://{proxy_creds}@{settings.BRIGHTDATA_PROXY}:{settings.BRIGHTDATA_PORT}",  # noqa: E501
         }
         return proxies

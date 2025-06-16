@@ -55,21 +55,39 @@ class LSEG:
             try:
                 ric_data = self.tasks.pop(0)
             except IndexError:
-                logger.debug("Thread %s: no more tasks", threading.current_thread().name)
+                logger.debug(
+                    "Thread %s: no more tasks", threading.current_thread().name
+                )
                 return
 
             ric = tuple(ric_data.values())
             if ric in self.result:
-                logger.debug("Thread %s: skipping duplicate RIC %s", threading.current_thread().name, ric)
+                logger.debug(
+                    "Thread %s: skipping duplicate RIC %s",
+                    threading.current_thread().name,
+                    ric,
+                )
                 continue
 
             try:
-                logger.debug("Thread %s: fetching ESG scores for RIC %s", threading.current_thread().name, ric[1])
+                logger.debug(
+                    "Thread %s: fetching ESG scores for RIC %s",
+                    threading.current_thread().name,
+                    ric[1],
+                )
                 self.result[ric] = self.fetch_esg_scores(ric[1])
-                logger.info("Thread %s: fetched data for %s", threading.current_thread().name, ric[1])
+                logger.info(
+                    "Thread %s: fetched data for %s",
+                    threading.current_thread().name,
+                    ric[1],
+                )
             except Exception as e:
-                logger.warning("Thread %s: Unable to fetch data for %s: %s",
-                               threading.current_thread().name, ric[1], str(e))
+                logger.warning(
+                    "Thread %s: Unable to fetch data for %s: %s",
+                    threading.current_thread().name,
+                    ric[1],
+                    str(e),
+                )
 
     def fetch_esg_scores(self, ric):
         url = urljoin(self.BASE_URL, "esgsearchresult/")
