@@ -17,7 +17,7 @@ class Request:
                 req.raise_for_status()
                 return req
             except requests.exceptions.RequestException as e:
-                logger.error(
+                logger.debug(
                     f"{method.upper()} request failed. Attempt {i + 1} of {settings.REQUEST_MAX_RETRIES}. Error: {e}"  # noqa: E501
                 )
                 if (i + 1) == settings.REQUEST_MAX_RETRIES:
