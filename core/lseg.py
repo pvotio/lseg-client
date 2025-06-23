@@ -1,5 +1,6 @@
 import multiprocessing
 import threading
+from multiprocessing.managers import SyncManager
 from urllib.parse import urljoin
 
 from config import logger, settings
@@ -39,7 +40,7 @@ class LSEG:
             raise
 
     def start_workers(self):
-        manager = multiprocessing.Manager()
+        manager = self._start_sync_manager()
         self.tasks = manager.list(self.tasks)
         self.result = manager.dict()
         lock = manager.RLock()
@@ -115,3 +116,9 @@ class LSEG:
         resp = self.request("GET", url, params=params)
         resp.raise_for_status()
         return resp.json()
+
+    @staticmethod
+    def _start_sync_manager():
+        m = SyncManager(address=("127.0.0.1", 0), authkey=b"lseg")
+        m.start()
+        return m
