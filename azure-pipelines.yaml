@@ -35,4 +35,4 @@ stages:
               buildContext: '$(System.DefaultWorkingDirectory)/'
               tags: |
                 latest
-                $(tag).$(buildId)pa-etl-lseg
+                $(tag).$(buildId)
